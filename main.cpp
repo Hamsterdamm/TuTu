@@ -24,8 +24,8 @@ int main() {
 	getStationsGraph(RZD, "graph.txt");//считываем из файла конфигурацию ж / д сети
 
 	TrafficController controller;
-	controller.makeSchedule(RZD, trains);
-	controller.findCollisions(RZD);
+	controller.makeSchedule(RZD, trains);//заполняем расписание
+	controller.findCollisions(RZD);//ищем столкновения
 
 	system("pause");
 	return 0;
@@ -45,18 +45,21 @@ void getTrainsSchedules(std::vector<Train>& trains, const char * filename)
 	{
 		std::getline(file, line);//вывод строки в буфер
 		while (std::getline(file, line)) {//пока выводим строки в буфер
-			Train train;//объект класса Поезд
+			std::string name;//название поезда
+			std::vector<unsigned> path;//маршрут поезда
 
 			std::replace(line.begin(), line.end(), '-', ' ');//заменяем "-" на пробелы во входных данных о маршрутах
 			std::istringstream iss(line);//направляем данные из буфера-строки в строковый поток
 
-			iss >> train.name;//первый элемент строки - название поезда
+			iss >> name;//первый элемент строки - название поезда
 
 			unsigned station;//станция в маршруте поезда
+			
 			while (iss >> station) {
-				train.path.push_back(station);//заполняем вектор маршрута поезда
+				path.push_back(station);//заполняем вектор маршрута поезда
 			}
 
+			Train train(name, path);//объект класса Поезд инициализируется значениями названия и маршрута
 			trains.push_back(train);//добавляем поезд в вектор поездов
 		}
 
