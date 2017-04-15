@@ -1,3 +1,6 @@
+#include <vector>
+#include "Train.h"
+
 #ifndef _TrafficController_H_
 #define _TrafficController_H_
 
@@ -9,7 +12,7 @@ private:
 public:
 	TrafficController();
 	~TrafficController();
-	void makeSchedule();
+	void makeSchedule(std::vector<std::vector<unsigned>> stationsGraph, std::vector<Train> trains);
 	void findCollisions();
 };
 

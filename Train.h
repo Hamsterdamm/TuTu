@@ -1,19 +1,25 @@
+#include <vector>
+#include <string>
+
 #ifndef _TRAIN_H_
 #define _TRAIN_H_
 
 class Train {
 
 private:
-	char* name;
+
 	int starttime;
 	int velocity;
 
 public:
+	std::string name;
+	std::vector<unsigned> path;
 
 	Train();
 	~Train();
-	char* getName() const;
-	char* getPath() const;
+	void setName() const;
+	std::string getName() const;
+	std::vector<unsigned> getPath() const;
 
 };
 

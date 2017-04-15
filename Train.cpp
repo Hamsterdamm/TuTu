@@ -8,12 +8,17 @@ Train::~Train()
 {
 }
 
-char * Train::getName() const
+void Train::setName() const
+{
+
+}
+
+std::string Train::getName() const
 {
 	return name;
 }
 
-char * Train::getPath() const
+std::vector<unsigned> Train::getPath() const
 {
-	return nullptr;
+	return path;
 }

@@ -1,9 +1,11 @@
+#include <vector>
+
 #ifndef _RAILWAY_H_
 #define _RAILWAY_H_
 
 class Railway {
 private:
-	int** stationsGraph;
+	std::vector<std::vector<unsigned>> stationsGraph;
 
 public:
 
