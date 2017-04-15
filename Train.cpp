@@ -26,3 +26,13 @@ std::vector<unsigned> Train::getPath() const
 {
 	return path;
 }
+
+int Train::getStarttime() const
+{
+	return starttime;
+}
+
+int Train::getVelocity() const
+{
+	return velocity;
+}

@@ -7,15 +7,12 @@
 class Train {
 
 private:
-
-
-	
-
-public:
 	int starttime;
 	int velocity;
 	std::string name;
-	std::vector<unsigned> path;
+	std::vector<unsigned> path;	
+
+public:
 
 	Train();
 	Train(std::string name, std::vector<unsigned> path);
@@ -23,6 +20,8 @@ public:
 	void setName();
 	std::string getName() const;
 	std::vector<unsigned> getPath() const;
+	int getStarttime() const;
+	int getVelocity() const;
 
 };
 
