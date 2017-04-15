@@ -1,48 +1,58 @@
 #include <fstream>
 #include <iostream>
+#include <string>
+#include <sstream>
+#include <vector>
+#include <algorithm>
 
-//void readFile(char* filename);
+#include "Railway.h"
+#include "Train.h"
+
+
+void getTrainsSchedules(std::vector<Train>& trains, const char* filename);
 
 int main() {
 
 	setlocale(LC_ALL, "RUS");//поддержка русской кодировки
-	
-	//char* filename=0;
 
-	//std::cout << "Введите название файла" << std::endl;
-	//std::cin >> filename;
-	//readFile(filename);
+	std::vector<Train> trains;
+	getTrainsSchedules(trains, "schedule.txt");
 
-	char buff[50];//буфер для обмена с файлом
-	
-	
-	std::ifstream input("schedule.txt", std::ios_base::in);//входной файловый поток
+	system("pause");
+	return 0;
+}
+
+void getTrainsSchedules(std::vector<Train>& trains, const char * filename)
+{
+	std::string line;
+	std::ifstream input(filename, std::ios_base::in);//входной файловый поток
+
 	if (!input.is_open()) {
 		std::cout << "Файл не найден!" << std::endl;
 		system("pause");
 		//return -1;
 	}
-	
-	input.getline(buff, 50);//чтение строки из файла
-	input.close();
-	std::cout << buff << std::endl;
+	else
+	{
+		std::getline(input, line);
+		while (std::getline(input, line)) {
+			Train train;
 
-	system("pause");
-	return 0;
+			std::replace(line.begin(), line.end(), '-', ' ');
+			std::istringstream iss(line);
+
+			iss >> train.name;
+
+			unsigned point;
+			while (iss >> point) {
+				train.path.push_back(point);
+			}
+			trains.push_back(train);
+
+		}
+
+		input.close();
+	}
+
+
 }
-//
-//void readFile(char* filename) {
-//	char buff[50];//буфер для обмена с файлом
-//
-//
-//	std::ifstream input(filename, std::ios_base::in);//входной файловый поток
-//	if (!input.is_open()) {
-//		std::cout << "Файл не найден!" << std::endl;
-//		system("pause");
-//		//return -1;
-//	}
-//
-//	input.getline(buff, 50);//чтение строки из файла
-//	input.close();
-//	std::cout << buff << std::endl;
-//};
