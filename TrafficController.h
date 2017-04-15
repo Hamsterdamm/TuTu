@@ -14,8 +14,8 @@ private:
 public:
 	TrafficController();
 	~TrafficController();
-	void makeSchedule(Railway& railway, std::vector<Train> trains);
-	void findCollisions(Railway& railway);
+	void makeSchedule(Railway& railway, std::vector<Train> trains);//метод построения расписания поездов по станциям
+	void findCollisions(Railway& railway);//метод поиска столкновений по расписанию
 };
 
 #endif//_TrafficController_H_
