@@ -7,6 +7,7 @@
 
 #include "Railway.h"
 #include "Train.h"
+#include "TrafficController.h"
 
 
 void getTrainsSchedules(std::vector<Train>& trains, const char* filename);//функция считывания из файла информации о поездах
@@ -21,6 +22,10 @@ int main() {
 
 	Railway RZD;//ж/д сеть
 	getStationsGraph(RZD, "graph.txt");//считываем из файла конфигурацию ж / д сети
+
+	TrafficController controller;
+	controller.makeSchedule(RZD, trains);
+	controller.findCollisions(RZD);
 
 	system("pause");
 	return 0;
