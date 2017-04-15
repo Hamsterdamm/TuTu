@@ -5,10 +5,10 @@
 
 class Railway {
 private:
-	std::vector<std::vector<unsigned>> stationsGraph;
+	
 
 public:
-
+	std::vector<std::vector<unsigned>> stationsGraph;
 	Railway();
 	~Railway();
 
