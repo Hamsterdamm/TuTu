@@ -18,6 +18,7 @@ public:
 	std::vector<unsigned> path;
 
 	Train();
+	Train(std::string name, std::vector<unsigned> path);
 	~Train();
 	void setName();
 	std::string getName() const;
