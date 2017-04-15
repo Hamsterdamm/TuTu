@@ -7,13 +7,14 @@
 class TrafficController
 {
 private:
-	int** schedule;
+	std::vector<std::vector<unsigned>> schedule;
+	unsigned numTrains;
 
 public:
 	TrafficController();
 	~TrafficController();
 	void makeSchedule(std::vector<std::vector<unsigned>> stationsGraph, std::vector<Train> trains);
-	void findCollisions();
+	void findCollisions(std::vector<std::vector<unsigned>> stationsGraph);
 };
 
 #endif//_TrafficController_H_

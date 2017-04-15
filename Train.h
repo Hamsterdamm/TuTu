@@ -8,10 +8,12 @@ class Train {
 
 private:
 
-	int starttime;
-	int velocity;
+
+
 
 public:
+	int starttime;
+	int velocity;
 	std::string name;
 	std::vector<unsigned> path;
 
