@@ -1,12 +1,9 @@
 #include "TrafficController.h"
 #include <iostream>
 
-
-
 TrafficController::TrafficController()
 {
 }
-
 
 TrafficController::~TrafficController()
 {
