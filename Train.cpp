@@ -12,11 +12,6 @@ Train::~Train()
 {
 }
 
-void Train::setName()
-{
-
-}
-
 std::string Train::getName() const
 {
 	return name;

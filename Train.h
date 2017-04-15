@@ -17,7 +17,6 @@ public:
 	Train();
 	Train(std::string name, std::vector<unsigned> path);
 	~Train();
-	void setName();
 	std::string getName() const;
 	std::vector<unsigned> getPath() const;
 	int getStarttime() const;
