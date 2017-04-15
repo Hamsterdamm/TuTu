@@ -9,7 +9,7 @@ class Train {
 private:
 
 
-
+	
 
 public:
 	int starttime;
@@ -19,7 +19,7 @@ public:
 
 	Train();
 	~Train();
-	void setName() const;
+	void setName();
 	std::string getName() const;
 	std::vector<unsigned> getPath() const;
 

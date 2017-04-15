@@ -8,7 +8,7 @@ Train::~Train()
 {
 }
 
-void Train::setName() const
+void Train::setName()
 {
 
 }
