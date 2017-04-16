@@ -11,7 +11,7 @@
 
 
 int getTrainsSchedules(std::vector<Train>& trains, const char* filename);//функция считывания из файла информации о поездах
-int getStationsGraph(RailwayType &stationsGraph, const char* filename);//функция считывания из файла конфигурации ж/д сети
+int getStationsGraph(Railway &stationsGraph, const char* filename);//функция считывания из файла конфигурации ж/д сети
 void question(bool &flag);//запрос решения от пользователя: считать или не считать
 
 int main() {
@@ -27,7 +27,7 @@ int main() {
 		return -1;
 	}
 		 
-	RailwayType RZD;//ж/д сеть
+	Railway RZD;//ж/д сеть
 	if (getStationsGraph(RZD, "graph_2.txt") == -1) {			//считываем из файла конфигурацию сети
 		std::cout << "Файл не найден!" << std::endl;		//если файл не найден - возвращаем -1 завершаем программу
 		std::cout << "Для выхода нажмите любую клавишу.";
@@ -101,7 +101,7 @@ int getTrainsSchedules(std::vector<Train>& trains, const char * filename)
 	return 0;
 }
 
-int getStationsGraph(RailwayType &stationsGraph, const char * filename)
+int getStationsGraph(Railway &stationsGraph, const char * filename)
 {
 	std::string line;//буфер-строка
 	std::ifstream file(filename, std::ios_base::in);//входной файловый поток

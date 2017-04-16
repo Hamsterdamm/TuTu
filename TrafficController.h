@@ -4,7 +4,7 @@
 #ifndef _TrafficController_H_
 #define _TrafficController_H_
 
-typedef std::vector<std::vector<unsigned>> RailwayType;
+typedef std::vector<std::vector<unsigned>> Railway;
 
 class TrafficController
 {
@@ -18,8 +18,8 @@ public:
 	TrafficController();
 	~TrafficController();
 
-	int makeSchedule(RailwayType& railway, std::vector<Train> trains);//метод построения расписания поездов по станциям
-	long findCollisions(RailwayType& railway, bool flag);//метод поиска столкновений по расписанию
+	int makeSchedule(Railway& railway, std::vector<Train> trains);//метод построения расписания поездов по станциям
+	long findCollisions(Railway& railway, bool flag);//метод поиска столкновений по расписанию
 	std::vector<std::vector<unsigned>> getSchedule() const;//метод получения расписания
 };
 
