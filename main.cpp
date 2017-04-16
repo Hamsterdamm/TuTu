@@ -14,13 +14,16 @@ int getTrainsSchedules(std::vector<Train>& trains, const char* filename);//функц
 int getStationsGraph(Railway &stationsGraph, const char* filename);//функция считывания из файла конфигурации ж/д сети
 void question(bool &flag);//запрос решения от пользователя: считать или не считать
 
+char* trainsFileName = "schedule_1.txt";
+char* graphFileName = "graph_1.txt";
+
 int main() {
 
 	setlocale(LC_ALL, "RUS");//поддержка русской кодировки
 
 	std::vector<Train> trains;//вектор поездов
 	//int check = getTrainsSchedules(trains, "schedule.txt");
-	if (getTrainsSchedules(trains, "schedule_2.txt") == -1) {	//считываем из файла информации о поездах
+	if (getTrainsSchedules(trains, trainsFileName) == -1) {	//считываем из файла информации о поездах
 		std::cout << "Файл не найден!" << std::endl;		//если файл не найден - возвращаем -1 завершаем программу
 		std::cout << "Для выхода нажмите любую клавишу.";
 		_getch();
@@ -28,7 +31,7 @@ int main() {
 	}
 		 
 	Railway RZD;//ж/д сеть
-	if (getStationsGraph(RZD, "graph_2.txt") == -1) {			//считываем из файла конфигурацию сети
+	if (getStationsGraph(RZD, graphFileName) == -1) {			//считываем из файла конфигурацию сети
 		std::cout << "Файл не найден!" << std::endl;		//если файл не найден - возвращаем -1 завершаем программу
 		std::cout << "Для выхода нажмите любую клавишу.";
 		_getch();
