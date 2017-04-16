@@ -10,13 +10,13 @@ class TrafficController
 {
 private:
 	std::vector<std::vector<unsigned>> schedule;
-
-public:
 	unsigned numTrains;
 	unsigned numStations;
 
-	TrafficController();
-	~TrafficController();
+public:
+
+	TrafficController();//конструктор
+	~TrafficController();//деструктор
 
 	int makeSchedule(Railway& railway, std::vector<Train> trains);//метод построения расписания поездов по станциям
 	long findCollisions(Railway& railway, bool flag);//метод поиска столкновений по расписанию

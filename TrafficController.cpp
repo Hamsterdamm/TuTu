@@ -1,11 +1,11 @@
 #include "TrafficController.h"
 #include <iostream>
 
-TrafficController::TrafficController()
+TrafficController::TrafficController()//конструктор
 {
 }
 
-TrafficController::~TrafficController()
+TrafficController::~TrafficController()//деструктор
 {
 }
 
@@ -19,7 +19,7 @@ int TrafficController::makeSchedule(Railway& railway, std::vector<Train> trains)
 	}
 
 	for (size_t i = 0; i < numTrains; i++) {
-		std::vector<unsigned> path = trains[i].getPath();
+		std::vector<unsigned> path = trains[i].getPath();//инициализируем локальную переменную для маршрута
 		unsigned pathLen = path.size();//определяем число станций в маршруте поезда
 
 		schedule[i][path[0] - 1] = trains[i].getStarttime(); //задаем время отправления поезда от первой станции маршрута
@@ -49,7 +49,7 @@ long TrafficController::findCollisions(Railway& railway, bool flag)		//метод пои
 				for (size_t i = 0; i < numTrains; i++) {//проход по поездам
 					for (size_t j = i+1; j < numTrains; j++) {//если поезд i сталкивается с поездом j, то верно и обратное. 
 															  //т.о. это одно столкновение и повторно проверять столкновение j и i не требуется
-						if ((schedule[i][k] != 0) && (schedule[j][k] != 0) && (schedule[i][l] != 0) && (schedule[j][l] != 0)) {//если время прибытия поезда в любую из станций участка не нулевое
+						if ((schedule[i][k] != 0) && (schedule[j][k] != 0) && (schedule[i][l] != 0) && (schedule[j][l] != 0)) {//если время прибытия поезда в любую из станций участка не нулевое (начальный момент времени принят за 1)
 
 							if((schedule[i][k]<= schedule[j][l])&& (schedule[j][k] <= schedule[i][l]))	//условие столкновения поездов: интервалы перекрываются – есть столкновение
 							{
@@ -57,7 +57,7 @@ long TrafficController::findCollisions(Railway& railway, bool flag)		//метод пои
 									return -1;
 								}
 
-								collisionsCount++;
+								collisionsCount++;//счетчик числа столкновений
 
 							}
 						}
