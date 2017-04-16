@@ -14,11 +14,12 @@ private:
 public:
 	unsigned numTrains;
 	unsigned numStations;
+
 	TrafficController();
 	~TrafficController();
 
 	int makeSchedule(RailwayType& railway, std::vector<Train> trains);//метод построения расписания поездов по станциям
-	unsigned findCollisions(RailwayType& railway, bool flag);//метод поиска столкновений по расписанию
+	long findCollisions(RailwayType& railway, bool flag);//метод поиска столкновений по расписанию
 	std::vector<std::vector<unsigned>> getSchedule() const;//метод получения расписания
 };
 

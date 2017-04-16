@@ -20,7 +20,7 @@ int main() {
 
 	std::vector<Train> trains;//вектор поездов
 	//int check = getTrainsSchedules(trains, "schedule.txt");
-	if (getTrainsSchedules(trains, "schedule_1.txt") == -1) {	//считываем из файла информации о поездах
+	if (getTrainsSchedules(trains, "schedule_2.txt") == -1) {	//считываем из файла информации о поездах
 		std::cout << "Файл не найден!" << std::endl;		//если файл не найден - возвращаем -1 завершаем программу
 		std::cout << "Для выхода нажмите любую клавишу.";
 		_getch();
@@ -28,7 +28,7 @@ int main() {
 	}
 		 
 	RailwayType RZD;//ж/д сеть
-	if (getStationsGraph(RZD, "graph_1.txt") == -1) {			//считываем из файла конфигурацию сети
+	if (getStationsGraph(RZD, "graph_2.txt") == -1) {			//считываем из файла конфигурацию сети
 		std::cout << "Файл не найден!" << std::endl;		//если файл не найден - возвращаем -1 завершаем программу
 		std::cout << "Для выхода нажмите любую клавишу.";
 		_getch();
@@ -54,7 +54,7 @@ int main() {
 			std::cout << "Столкновения не произойдут." << std::endl; 
 			break; 
 		}
-		case 1:{
+		case -1:{
 			std::cout << "Произойдут столкновения!" << std::endl;
 			break; 
 		}
