@@ -38,7 +38,7 @@ int TrafficController::makeSchedule(RailwayType& railway, std::vector<Train> tra
 	return 0;
 }
 
-long TrafficController::findCollisions(RailwayType& railway, bool flag)//метод поиска столкновений по расписанию
+long TrafficController::findCollisions(RailwayType& railway, bool flag)		//метод поиска столкновений по расписанию
 {
 
 	unsigned collisionsCount = 0;
@@ -51,11 +51,11 @@ long TrafficController::findCollisions(RailwayType& railway, bool flag)//метод п
 															  //т.о. это одно столкновение и повторно проверять столкновение j и i не требуется
 						if ((schedule[i][k] != 0) && (schedule[j][k] != 0) && (schedule[i][l] != 0) && (schedule[j][l] != 0)) {//если время прибытия поезда в любую из станций участка не нулевое
 							
-							if((schedule[i][k]== schedule[j][k]) || (schedule[i][l] == schedule[j][l]) ||
-								(((schedule[i][k] < schedule[i][l]) && (schedule[j][k] > schedule[j][l])) &&
-								(!((schedule[j][l]>schedule[i][l]) || (schedule[i][k]>schedule[j][k])))) ||
-								(((schedule[i][k] > schedule[i][l]) && (schedule[j][k] < schedule[j][l])) &&
-								(!((schedule[j][l]>schedule[i][l]) || (schedule[i][k]>schedule[j][k])))))
+							if((schedule[i][k]== schedule[j][k]) || (schedule[i][l] == schedule[j][l]) ||		//!!условие работает только для случая, когда у поездов равные скорости!!
+								(((schedule[i][k] < schedule[i][l]) && (schedule[j][k] > schedule[j][l])) &&	//поезда столкнутся если: 
+								(!((schedule[j][l]>schedule[i][l]) || (schedule[i][k]>schedule[j][k])))) ||		//а) одновременно находятся на одной и той же станции
+								(((schedule[i][k] > schedule[i][l]) && (schedule[j][k] < schedule[j][l])) &&	//б)при встречном движении поезд отбывает со станции раньше, 
+								(!((schedule[j][l]>schedule[i][l]) || (schedule[i][k]>schedule[j][k])))))		//чем на нее прибывает встречный поезд
 							{
 								if (!flag) {
 									return -1;
