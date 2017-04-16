@@ -4,18 +4,21 @@
 #define _RAILWAY_H_
 
 class Railway {
-public:
+private:
 
-
+	unsigned numStations;
 	std::vector<std::vector<unsigned>> stationsGraph;
 
+public:
+
 	Railway();//конструктор
+	Railway(std::vector<std::vector<unsigned>> _stationsGraph);//конструктор
 	~Railway();//деструктор
 
 
-
+	unsigned getNumStations() const;
 	//int getDistance(int from,int to) const;
-	//std::vector<std::vector<unsigned>> getGraph() const;
+	std::vector<std::vector<unsigned>> getStationsGraph() const;
 };
 
 #endif //_RAILWAY_H_

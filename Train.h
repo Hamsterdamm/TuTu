@@ -7,6 +7,7 @@
 class Train {
 
 private:
+
 	int starttime;//время отправления поезда с начальной станции
 	int velocity;//скорость поезда
 	std::string name;//название поезда
