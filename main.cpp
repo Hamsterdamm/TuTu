@@ -12,7 +12,8 @@
 
 
 int getTrainsSchedules(std::vector<Train>& trains, const char* filename);//функция считывания из файла информации о поездах
-int getStationsGraph(std::vector<std::vector<unsigned>> &stationsGraph, const char* filename);//функция считывания из файла конфигурации ж/д сети
+int getStationsGraph(RailwayType &stationsGraph, const char* filename);//функция считывания из файла конфигурации ж/д сети
+void question(bool &flag);
 
 int main() {
 
@@ -25,30 +26,27 @@ int main() {
 	getStationsGraph(RZD, "graph.txt");//считываем из файла конфигурацию ж / д сети
 
 	TrafficController controller;
-	std::cout << "Подсчитать все столкновения? y/n" << std::endl;
-	char ans;
-	bool flag(false);
-	std::cin >> ans;
-	if (ans == 'y')
-		flag = true;
 
+	bool flag(false);
+	question(flag);
+	
 	controller.makeSchedule(RZD, trains);//заполняем расписание
 
 	switch (controller.findCollisions(RZD, flag)) {//проверка на столкновения
-	case 0:{
-		std::cout << "Столкновения не произойдут." << std::endl; 
-		break; 
-	}
-	case 1:{
-		std::cout << "Произойдут столкновения!" << std::endl;
-		break; 
-	}
-	default:{		
-		std::cout << "Произойдут столкновения. Число столкновений: " << controller.findCollisions(RZD, flag) << std::endl; 
+		case 0:{
+			std::cout << "Столкновения не произойдут." << std::endl; 
+			break; 
+		}
+		case 1:{
+			std::cout << "Произойдут столкновения!" << std::endl;
+			break; 
+		}
+		default:{		
+			std::cout << "Произойдут столкновения. Число столкновений: " << controller.findCollisions(RZD, flag) << std::endl; 
+		}
 	}
 
-	}
-
+	std::cout << "Для выхода нажмите любую клавишу.";
 	_getch();
 	return 0;
 }
@@ -88,7 +86,7 @@ int getTrainsSchedules(std::vector<Train>& trains, const char * filename)
 	return 0;
 }
 
-int getStationsGraph(std::vector<std::vector<unsigned>> &stationsGraph, const char * filename)
+int getStationsGraph(RailwayType &stationsGraph, const char * filename)
 {
 	std::string line;//буфер-строка
 	std::ifstream file(filename, std::ios_base::in);//входной файловый поток
@@ -118,4 +116,19 @@ int getStationsGraph(std::vector<std::vector<unsigned>> &stationsGraph, const ch
 	file.close();//закрываем файл
 
 	return 0;
+}
+
+void question(bool &flag)
+{
+	std::cout << "Подсчитать все столкновения? y/n" << std::endl;
+	char ans;
+	std::cin >> ans;
+	if (ans == 'y')
+		flag = true;
+	else if (ans == 'n')
+		flag = false;
+	else {
+		std::cout << "Некорректный ввод! Повторите попытку!" << std::endl;
+		question(flag = false);
+	}
 }
