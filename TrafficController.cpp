@@ -9,9 +9,9 @@ TrafficController::~TrafficController()
 {
 }
 
-void TrafficController::makeSchedule(Railway& railway, std::vector<Train> trains)//метод построения расписания поездов по станциям
+void TrafficController::makeSchedule(RailwayType& railway, std::vector<Train> trains)//метод построения расписания поездов по станциям
 {
-	numStations = railway.getNumStations();//определяем количество станций
+	numStations = railway.size();//определяем количество станций
 	numTrains = trains.size();//определяем количество поездов
 	for (size_t i = 0; i < numTrains; i++) {//инициализируем матрицу расписания нулями
 		std::vector<unsigned> train(numStations, 0);
@@ -28,7 +28,7 @@ void TrafficController::makeSchedule(Railway& railway, std::vector<Train> trains
 		for (size_t p = 1; p < pathLen; p++) {
 			schedule[i][path[p]-1] =														//в расписании поездов для i-го поезда 
 				schedule[i][path[p-1] - 1] +												//время прибытия на p-ю станцию из его маршрута 
-				railway.getStationsGraph()[path[p]-1][path[p - 1]-1]/ trains[i].getVelocity();					//равно расстоянияю между (p-1)-й и p-й станциями, 
+				railway[path[p]-1][path[p - 1]-1]/ trains[i].getVelocity();					//равно расстоянияю между (p-1)-й и p-й станциями, 
 																							//деленное на скорость (по условию = 1 для всех) 
 																							//+ время отбытия с предыдущей станции
 		}
@@ -37,14 +37,14 @@ void TrafficController::makeSchedule(Railway& railway, std::vector<Train> trains
 
 }
 
-unsigned TrafficController::findCollisions(Railway& railway, bool flag)//метод поиска столкновений по расписанию
+unsigned TrafficController::findCollisions(RailwayType& railway, bool flag)//метод поиска столкновений по расписанию
 {
 
 	unsigned collisionsCount = 0;
 	for (size_t k = 0; k < numStations;k++) {//проход по станциям
 		for (size_t l = k+1; l < numStations; l++) {//т.к. путь между k и l станциями = пути между l и k станциями, 
 													//то матрица смежности - симметричная и проходим только по половине матрицы
-			if ((railway.getStationsGraph()[k][l] != 0)) {//проверяем только существующие пути (т.е. расстояние между станциями не равно 0)
+			if ((railway[k][l] != 0)) {//проверяем только существующие пути (т.е. расстояние между станциями не равно 0)
 				for (size_t i = 0; i < numTrains; i++) {//проход по поездам
 					for (size_t j = i+1; j < numTrains; j++) {//если поезд i сталкивается с поездом j, то верно и обратное. 
 															  //т.о. это одно столкновение и повторно проверять столкновение j и i не требуется

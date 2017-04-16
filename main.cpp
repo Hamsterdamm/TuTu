@@ -10,7 +10,6 @@
 #include "Train.h"
 #include "TrafficController.h"
 
-typedef std::vector<std::vector<unsigned>> RailwayType;
 
 int getTrainsSchedules(std::vector<Train>& trains, const char* filename);//функция считывания из файла информации о поездах
 int getStationsGraph(std::vector<std::vector<unsigned>> &stationsGraph, const char* filename);//функция считывания из файла конфигурации ж/д сети
@@ -22,9 +21,8 @@ int main() {
 	std::vector<Train> trains;//вектор поездов
 	getTrainsSchedules(trains, "schedule.txt");//считываем из файла информации о поездах
 
-	RailwayType stationsGraph;
-	getStationsGraph(stationsGraph, "graph.txt");//считываем из файла конфигурацию ж / д сети
-	Railway RZD(stationsGraph);//ж/д сеть
+	RailwayType RZD;//ж/д сеть
+	getStationsGraph(RZD, "graph.txt");//считываем из файла конфигурацию ж / д сети
 
 	TrafficController controller;
 	std::cout << "Подсчитать все столкновения? y/n" << std::endl;
