@@ -24,8 +24,15 @@ int main() {
 	getStationsGraph(RZD, "graph.txt");//считываем из файла конфигурацию ж / д сети
 
 	TrafficController controller;
+	std::cout << "ѕодсчитать все столкновени€?" << std::endl;
+	char ans;
+	bool flag(false);
+	std::cin >> ans;
+	if (ans == 'y')
+		flag = true;
+
 	controller.makeSchedule(RZD, trains);//заполн€ем расписание
-	controller.findCollisions(RZD);//ищем столкновени€
+	controller.findCollisions(RZD, flag);//ищем столкновени€
 
 	system("pause");
 	return 0;
@@ -95,6 +102,7 @@ void getStationsGraph(Railway & railway, const char * filename)
 
 			railway.stationsGraph.push_back(graphLine);//добавл€ем строку к матрице смежности
 		}
+
 
 		file.close();//закрываем файл
 	}
