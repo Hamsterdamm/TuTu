@@ -4,11 +4,13 @@
 #include <sstream>
 #include <vector>
 #include <algorithm>
+#include <conio.h>
 
 #include "Railway.h"
 #include "Train.h"
 #include "TrafficController.h"
 
+typedef std::vector<std::vector<unsigned>> RailwayType;
 
 int getTrainsSchedules(std::vector<Train>& trains, const char* filename);//функция считывания из файла информации о поездах
 int getStationsGraph(std::vector<std::vector<unsigned>> &stationsGraph, const char* filename);//функция считывания из файла конфигурации ж/д сети
@@ -20,7 +22,7 @@ int main() {
 	std::vector<Train> trains;//вектор поездов
 	getTrainsSchedules(trains, "schedule.txt");//считываем из файла информации о поездах
 
-	std::vector<std::vector<unsigned>> stationsGraph;
+	RailwayType stationsGraph;
 	getStationsGraph(stationsGraph, "graph.txt");//считываем из файла конфигурацию ж / д сети
 	Railway RZD(stationsGraph);//ж/д сеть
 
@@ -33,9 +35,23 @@ int main() {
 		flag = true;
 
 	controller.makeSchedule(RZD, trains);//заполняем расписание
-	controller.findCollisions(RZD, flag);//ищем столкновения
 
-	system("pause");
+	switch (controller.findCollisions(RZD, flag)) {//проверка на столкновения
+	case 0:{
+		std::cout << "Столкновения не произойдут." << std::endl; 
+		break; 
+	}
+	case 1:{
+		std::cout << "Произойдут столкновения!" << std::endl;
+		break; 
+	}
+	default:{		
+		std::cout << "Произойдут столкновения. Число столкновений: " << controller.findCollisions(RZD, flag) << std::endl; 
+	}
+
+	}
+
+	_getch();
 	return 0;
 }
 

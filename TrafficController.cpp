@@ -37,7 +37,7 @@ void TrafficController::makeSchedule(Railway& railway, std::vector<Train> trains
 
 }
 
-int TrafficController::findCollisions(Railway& railway, bool flag)//метод поиска столкновений по расписанию
+unsigned TrafficController::findCollisions(Railway& railway, bool flag)//метод поиска столкновений по расписанию
 {
 
 	unsigned collisionsCount = 0;
@@ -59,10 +59,9 @@ int TrafficController::findCollisions(Railway& railway, bool flag)//метод поиска
 							{
 
 								if (!flag) {
-									std::cout << "Есть столкновения" << std::endl;
-									return -1;
+									return 1;
 								}
-								std::cout << "Столкновение" << std::endl;
+
 								collisionsCount++;
 
 							}
@@ -73,11 +72,11 @@ int TrafficController::findCollisions(Railway& railway, bool flag)//метод поиска
 		}
 
 	}
-	if (collisionsCount){
-		std::cout << "Число столкновений:" << collisionsCount << std::endl;
+	if (collisionsCount>1){
+		return collisionsCount;
 	}
-
-	return 0;
+	else
+		return 0;
 }
 
 std::vector<std::vector<unsigned>> TrafficController::getSchedule() const

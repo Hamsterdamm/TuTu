@@ -18,7 +18,7 @@ public:
 	~TrafficController();
 
 	void makeSchedule(Railway& railway, std::vector<Train> trains);//метод построения расписания поездов по станциям
-	int findCollisions(Railway& railway, bool flag);//метод поиска столкновений по расписанию
+	unsigned findCollisions(Railway& railway, bool flag);//метод поиска столкновений по расписанию
 	std::vector<std::vector<unsigned>> getSchedule() const;//метод получения расписания
 };
 
