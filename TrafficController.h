@@ -10,7 +10,6 @@ class TrafficController
 private:
 	std::vector<std::vector<unsigned>> schedule;
 
-
 public:
 	unsigned numTrains;
 	unsigned numStations;
