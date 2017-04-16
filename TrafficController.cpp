@@ -9,7 +9,7 @@ TrafficController::~TrafficController()
 {
 }
 
-void TrafficController::makeSchedule(RailwayType& railway, std::vector<Train> trains)//метод построения расписания поездов по станциям
+int TrafficController::makeSchedule(RailwayType& railway, std::vector<Train> trains)//метод построения расписания поездов по станциям
 {
 	numStations = railway.size();//определяем количество станций
 	numTrains = trains.size();//определяем количество поездов
@@ -18,14 +18,15 @@ void TrafficController::makeSchedule(RailwayType& railway, std::vector<Train> tr
 		schedule.push_back(train);
 	}
 
-	
-
 	for (size_t i = 0; i < numTrains; i++) {
 		std::vector<unsigned> path = trains[i].getPath();
 		unsigned pathLen = path.size();//определяем число станций в маршруте поезда
 
 		schedule[i][path[0] - 1] = trains[i].getStarttime(); //задаем время отправления поезда от первой станции маршрута
 		for (size_t p = 1; p < pathLen; p++) {
+			if (railway[path[p] - 1][path[p - 1] - 1] == 0) {
+				return -1;
+			}
 			schedule[i][path[p]-1] =														//в расписании поездов для i-го поезда 
 				schedule[i][path[p-1] - 1] +												//время прибытия на p-ю станцию из его маршрута 
 				railway[path[p]-1][path[p - 1]-1]/ trains[i].getVelocity();					//равно расстоянияю между (p-1)-й и p-й станциями, 
@@ -34,7 +35,7 @@ void TrafficController::makeSchedule(RailwayType& railway, std::vector<Train> tr
 		}
 	}
 
-
+	return 0;
 }
 
 unsigned TrafficController::findCollisions(RailwayType& railway, bool flag)//метод поиска столкновений по расписанию

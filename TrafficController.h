@@ -1,9 +1,10 @@
 #include <vector>
 #include "Train.h"
-#include "Railway.h"
 
 #ifndef _TrafficController_H_
 #define _TrafficController_H_
+
+typedef std::vector<std::vector<unsigned>> RailwayType;
 
 class TrafficController
 {
@@ -16,7 +17,7 @@ public:
 	TrafficController();
 	~TrafficController();
 
-	void makeSchedule(RailwayType& railway, std::vector<Train> trains);//метод построения расписания поездов по станциям
+	int makeSchedule(RailwayType& railway, std::vector<Train> trains);//метод построения расписания поездов по станциям
 	unsigned findCollisions(RailwayType& railway, bool flag);//метод поиска столкновений по расписанию
 	std::vector<std::vector<unsigned>> getSchedule() const;//метод получения расписания
 };
