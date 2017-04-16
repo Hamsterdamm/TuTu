@@ -7,20 +7,21 @@
 class Train {
 
 private:
-	int starttime;
-	int velocity;
-	std::string name;
-	std::vector<unsigned> path;	
+	int starttime;//время отправления поезда с начальной станции
+	int velocity;//скорость поезда
+	std::string name;//название поезда
+	std::vector<unsigned> path;	//маршрут поезда
 
 public:
 
-	Train();
-	Train(std::string name, std::vector<unsigned> path);
-	~Train();
-	std::string getName() const;
-	std::vector<unsigned> getPath() const;
-	int getStarttime() const;
-	int getVelocity() const;
+	Train();//конструктор класса, время отправления и скорость по умолчанию = 1
+	Train(std::string name, std::vector<unsigned> path);//конструктор класса поезд с входными данными об названии и маршруте
+	~Train();//деструктор
+
+	std::string getName() const;//метод получения названия поезда
+	std::vector<unsigned> getPath() const;//метод получения маршрута поезда
+	int getStarttime() const;//метод получения времени отправления поезда
+	int getVelocity() const;//метод получения скорости поезда
 
 };
 

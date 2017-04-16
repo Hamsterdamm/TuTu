@@ -5,10 +5,14 @@
 
 class Railway {
 public:
+
+
 	std::vector<std::vector<unsigned>> stationsGraph;
 
-	Railway();
-	~Railway();
+	Railway();//конструктор
+	~Railway();//деструктор
+
+
 
 	//int getDistance(int from,int to) const;
 	//std::vector<std::vector<unsigned>> getGraph() const;
