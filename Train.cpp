@@ -4,7 +4,7 @@ Train::Train():starttime(0),velocity(1)
 {
 }
 
-Train::Train(std::string _name, std::vector<unsigned> _path) : starttime(0), velocity(1), name(_name), path(_path)
+Train::Train(std::string _name, std::vector<unsigned> _path) : starttime(1), velocity(1), name(_name), path(_path)
 {
 }
 
