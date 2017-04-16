@@ -12,19 +12,11 @@ Railway::~Railway()
 {
 }
 
-
-
-
 unsigned Railway::getNumStations() const
 {
 	return numStations;
 }
 
-//int Railway::getDistance(int from, int to) const
-//{
-//	return 0;
-//}
-//
 std::vector<std::vector<unsigned>> Railway::getStationsGraph() const
 {
 	return stationsGraph;

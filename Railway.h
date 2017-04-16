@@ -17,7 +17,6 @@ public:
 
 
 	unsigned getNumStations() const;
-	//int getDistance(int from,int to) const;
 	std::vector<std::vector<unsigned>> getStationsGraph() const;
 };
 
