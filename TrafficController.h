@@ -8,14 +8,18 @@
 class TrafficController
 {
 private:
-	std::vector<std::vector<long int>> schedule;
+	std::vector<std::vector<unsigned>> schedule;
+
+
+public:
 	unsigned numTrains;
 	unsigned numStations;
-public:
 	TrafficController();
 	~TrafficController();
+
 	void makeSchedule(Railway& railway, std::vector<Train> trains);//метод построения расписания поездов по станциям
-	void findCollisions(Railway& railway);//метод поиска столкновений по расписанию
+	int findCollisions(Railway& railway, bool flag);//метод поиска столкновений по расписанию
+	std::vector<std::vector<unsigned>> getSchedule() const;//метод получения расписания
 };
 
 #endif//_TrafficController_H_
