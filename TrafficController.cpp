@@ -38,7 +38,7 @@ int TrafficController::makeSchedule(RailwayType& railway, std::vector<Train> tra
 	return 0;
 }
 
-unsigned TrafficController::findCollisions(RailwayType& railway, bool flag)//метод поиска столкновений по расписанию
+long TrafficController::findCollisions(RailwayType& railway, bool flag)//метод поиска столкновений по расписанию
 {
 
 	unsigned collisionsCount = 0;
@@ -51,16 +51,14 @@ unsigned TrafficController::findCollisions(RailwayType& railway, bool flag)//мет
 															  //т.о. это одно столкновение и повторно проверять столкновение j и i не требуется
 						if ((schedule[i][k] != 0) && (schedule[j][k] != 0) && (schedule[i][l] != 0) && (schedule[j][l] != 0)) {//если время прибытия поезда в любую из станций участка не нулевое
 							
-							if ((((schedule[i][k] >= schedule[j][k]) && (schedule[i][k] <= schedule[j][l])) || ((schedule[i][k] <= schedule[j][k]) && (schedule[i][k] >= schedule[j][l])) ||//если время прибытия одного поезда на станцию k или станцию l
-								((schedule[i][l] >= schedule[j][k]) && (schedule[i][l] <= schedule[j][l])) || ((schedule[i][l] <= schedule[j][k]) && (schedule[i][l] >= schedule[j][l]))) ||//попадает в интервал времени между отбытием другого поезда со станции k и
-								(((schedule[j][k] >= schedule[i][k]) && (schedule[j][k] <= schedule[i][l])) || ((schedule[j][k] <= schedule[i][k]) && (schedule[j][k] >= schedule[i][l])) ||//прибытием на станцию l, то произойдет столкновение
-								((schedule[j][l] >= schedule[i][k]) && (schedule[j][l] <= schedule[i][l])) || ((schedule[j][l] <= schedule[i][k]) && (schedule[j][l] >= schedule[i][l]))))  
-																																														   
-																																														   
+							if((schedule[i][k]== schedule[j][k]) || (schedule[i][l] == schedule[j][l]) ||
+								(((schedule[i][k] < schedule[i][l]) && (schedule[j][k] > schedule[j][l])) &&
+								(!((schedule[j][l]>schedule[i][l]) || (schedule[i][k]>schedule[j][k])))) ||
+								(((schedule[i][k] > schedule[i][l]) && (schedule[j][k] < schedule[j][l])) &&
+								(!((schedule[j][l]>schedule[i][l]) || (schedule[i][k]>schedule[j][k])))))
 							{
-
 								if (!flag) {
-									return 1;
+									return -1;
 								}
 
 								collisionsCount++;
@@ -73,7 +71,7 @@ unsigned TrafficController::findCollisions(RailwayType& railway, bool flag)//мет
 		}
 
 	}
-	if (collisionsCount>1){
+	if (collisionsCount>0){
 		return collisionsCount;
 	}
 	else
