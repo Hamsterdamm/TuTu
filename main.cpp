@@ -19,7 +19,7 @@ char* graphFileName = "input/graph_2.txt";
 
 int main() {
 
-	setlocale(LC_ALL, "ru_RU.UTF-8");//поддержка русской кодировки
+	setlocale(LC_ALL, "RUS");//поддержка русской кодировки
 
 	std::vector<Train> trains;//вектор поездов
 	if (getTrainsSchedules(trains, trainsFileName) == -1) {	//считываем из файла информации о поездах
