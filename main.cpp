@@ -4,7 +4,7 @@
 #include <sstream>
 #include <vector>
 #include <algorithm>
-#include <conio.h>
+#include <locale>
 
 #include "Train.h"
 #include "TrafficController.h"
@@ -19,55 +19,54 @@ char* graphFileName = "input/graph_2.txt";
 
 int main() {
 
-	setlocale(LC_ALL, "RUS");//поддержка русской кодировки
+	setlocale(LC_ALL, "ru_RU.UTF-8");//поддержка русской кодировки
 
 	std::vector<Train> trains;//вектор поездов
-	//int check = getTrainsSchedules(trains, "schedule.txt");
 	if (getTrainsSchedules(trains, trainsFileName) == -1) {	//считываем из файла информации о поездах
 		std::cout << "Файл не найден!" << std::endl;		//если файл не найден - возвращаем -1 завершаем программу
-		std::cout << "Для выхода нажмите любую клавишу.";
-		_getch();
+		std::cout << "Для выхода нажмите enter.";
+		std::cin.get();
 		return -1;
 	}
-		 
+
 	Railway RZD;//ж/д сеть
 	if (getStationsGraph(RZD, graphFileName) == -1) {			//считываем из файла конфигурацию сети
 		std::cout << "Файл не найден!" << std::endl;		//если файл не найден - возвращаем -1 завершаем программу
-		std::cout << "Для выхода нажмите любую клавишу.";
-		_getch();
+		std::cout << "Для выхода нажмите enter.";
+		std::cin.get();
 		return -1;
 	}
-	
+
 	TrafficController controller;//диспетчер
 
 	bool flag(false);//флаг: считать столкновения - true, не считать - false
 	question(flag);//запрос решения от пользователя: считать или не считать
-	
+
 	if (controller.makeSchedule(RZD, trains) != 0) {//заполняем расписание
 		std::cout << "Невозможно составить расписание поездов!" << std::endl;
 		std::cout << "Для некоторых маршрутов отсутствуют железнодорожные пути между станциями." << std::endl;
-		std::cout << "Для выхода нажмите любую клавишу.";
-		_getch();
+		std::cout << "Для выхода нажмите enter.";
+		std::cin.get();
 		return -1;
 	}
 
 
 	switch (controller.findCollisions(RZD, flag)) {//проверка на столкновения
 		case 0:{
-			std::cout << "Столкновения не произойдут." << std::endl; 
-			break; 
+			std::cout << "Столкновения не произойдут." << std::endl;
+			break;
 		}
 		case -1:{
 			std::cout << "Произойдут столкновения!" << std::endl;
-			break; 
+			break;
 		}
-		default:{		
-			std::cout << "Произойдут столкновения. Число столкновений: " << controller.findCollisions(RZD, flag) << std::endl; 
+		default:{
+			std::cout << "Произойдут столкновения. Число столкновений: " << controller.findCollisions(RZD, flag) << std::endl;
 		}
 	}
 
-	std::cout << "Для выхода нажмите любую клавишу.";
-	_getch();
+	std::cout << "Для выхода нажмите enter.";
+	std::cin.get();
 	return 0;
 }
 
@@ -110,9 +109,6 @@ int getStationsGraph(Railway &stationsGraph, const char * filename)
 	std::ifstream file(filename, std::ios_base::in);//входной файловый поток
 
 	if (!file.is_open()) { //проверка наличия файла. если файл не найден - возвращаем -1 и выходим из функции
-		std::cout << "Файл не найден!" << std::endl;
-		std::cout << "Для выхода нажмите любую клавишу.";
-		_getch();
 		return -1;
 	}
 
