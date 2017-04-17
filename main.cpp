@@ -14,8 +14,8 @@ int getTrainsSchedules(std::vector<Train>& trains, const char* filename);//функц
 int getStationsGraph(Railway &stationsGraph, const char* filename);//функция считывания из файла конфигурации ж/д сети
 void question(bool &flag);//запрос решения от пользователя: считать или не считать
 
-char* trainsFileName = "schedule_1.txt";
-char* graphFileName = "graph_1.txt";
+char* trainsFileName = "input/schedule_2.txt";
+char* graphFileName = "input/graph_2.txt";
 
 int main() {
 
