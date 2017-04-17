@@ -53,9 +53,9 @@ long TrafficController::findCollisions(Railway& railway, bool flag)		//метод пои
 
 							if(((schedule[i][k]==schedule[j][k])||(schedule[i][l]==schedule[j][l]))||//при сонаправленном движении столкновение только в случае совпадения времени отбытия
                                 (((schedule[i][k]<schedule[i][l])&&(schedule[j][k]>schedule[j][l]))&&//при встречном движении поезда не столкнутся только если время отбытия одного поезда
-                                (!((schedule[j][l]<= schedule[i][l])&& (schedule[i][k] <= schedule[j][k]))))||//больше времени прибытия на эту же станцию другого
+                                (!((schedule[j][l]< schedule[i][l])&& (schedule[i][k] < schedule[j][k]))))||//больше времени прибытия на эту же станцию другого
                                 (((schedule[i][k]>schedule[i][l])&&(schedule[j][k]<schedule[j][l]))&&//во всех остальных случаях произойдет столкновение
-                                (!((schedule[i][l]<= schedule[j][l])&& (schedule[j][k] <= schedule[i][k])))))
+                                (!((schedule[i][l]< schedule[j][l])&& (schedule[j][k] < schedule[i][k])))))
 							{
 								if (!flag) {
 									return -1;
